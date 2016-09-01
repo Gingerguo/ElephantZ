@@ -4,15 +4,13 @@
     <meta charset="utf-8">
     <title></title>
     <script type="text/javascript" src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.min.js"></script>
   </head>
   <body>
-     <ul id="messages"></ul>
-     <form action="">
-       <input id="m" autocomplete="off" /><button>Send</button>
-     </form>
-     <script type="text/javascript" src="/public/main.js"></script>
-     <script type="text/javascript" src="/public/mobile.js"></script>
-   </body>
+    <canvas id="canvas" width="1000" height="1000" hidden="hidden" style="border: 1px solid red;"></canvas>
+    <button type="button" class="post" hidden="hidden">Submit</button>
+    <script type="text/javascript" src="/public/main.js"></script>
+    <script type="text/javascript" src="/public/mobile.js"></script>
+  </body>
 </html>
