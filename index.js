@@ -37,4 +37,7 @@ io.on('connection', function(socket){
     io.emit('posted image', image)
   })
 
+  socket.on('positions', function(positions){
+    socket.broadcast.emit('draw', positions)
+  })
 });
