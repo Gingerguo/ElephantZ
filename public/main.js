@@ -25,13 +25,36 @@ for (var i = 0; i < points; i++) {
 
 path.onFrame = function(event){
   // path.strokeColor.hue += 1
+  if(Math.abs(path.segments[0].point.y - elephant.segments[0].point.y) < .75){
+    horizontalShake(event)
+    verticalShake(event)
+  } else {
+    formToElephant()
+  }
+  path.smooth({type: 'catmull-rom'})
+}
+
+function formToElephant(){
   for (var i = 0; i < points; i++) {
     var segment = path.segments[i].point
     var target = elephant.segments[i].point
     var vector = target - segment
-    path.segments[i].point += vector /100
+    path.segments[i].point += vector /15
     path.smooth()
     // path.arcTo(path.segments[i].next.point, path.segments[i].next.next.point)
   }
-  path.smooth({type: 'catmull-rom'})
+}
+
+function horizontalShake(ev){
+ for (var i = 0; i < points /2; i++) {
+   path.segments[2*i].point.x = elephant.segments[2*i].point.x + Math.floor(Math.sin(ev.count/20)*20);
+  //  path.segments[2*i+1].point.x = elephant.segments[2*i+1].point.x + Math.floor(Math.cos(ev.count/20)*20);
+ }
+}
+
+function verticalShake(ev){
+  for (var i = 0; i < points /2; i++) {
+    // path.segments[2*i].point.y = elephant.segments[2*i].point.y + Math.floor(Math.sin(ev.count/20)*20);
+    path.segments[2*i+1].point.y = elephant.segments[2*i+1].point.y + Math.floor(Math.cos(ev.count/20)*20);
+  }
 }
