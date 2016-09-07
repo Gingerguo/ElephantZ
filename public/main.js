@@ -9,7 +9,7 @@ var path = new Path({
   strokeJoin: 'round',
   fullySelected: true
 })
-elephant = new Path(elephantData)
+var elephant = new Path(elephantData)
 elephant.strokeColor = 'black'
 elephant.strokeWidth = 10
 elephant.fullySelected = false
@@ -25,7 +25,7 @@ for (var i = 0; i < points; i++) {
 
 path.onFrame = function(event){
   // path.strokeColor.hue += 1
-  if(Math.abs(path.segments[0].point.y - elephant.segments[0].point.y) < .75){
+  if(Math.abs(path.segments[0].point.y - elephant.segments[0].point.y) < .75 && event.time < 5){
     horizontalShake(event)
     verticalShake(event)
   } else {
