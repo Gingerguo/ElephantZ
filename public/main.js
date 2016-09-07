@@ -25,13 +25,16 @@ for (var i = 0; i < points; i++) {
 
 path.onFrame = function(event){
   // path.strokeColor.hue += 1
+  formElephant()
+  path.smooth({type: 'catmull-rom'})
+}
+
+function formElephant(){
   for (var i = 0; i < points; i++) {
     var segment = path.segments[i].point
     var target = elephant.segments[i].point
     var vector = target - segment
     path.segments[i].point += vector /100
     path.smooth()
-    // path.arcTo(path.segments[i].next.point, path.segments[i].next.next.point)
   }
-  path.smooth({type: 'catmull-rom'})
 }
