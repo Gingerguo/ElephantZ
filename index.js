@@ -18,6 +18,9 @@ http.listen(3000, function(){
 });
 
 var touchThreshold = 0
+setInterval(function(){
+  touchThreshold = 0
+}, 3000)
 
 io.on('connection', function(socket){
   console.log('a user connected');
@@ -31,9 +34,6 @@ io.on('connection', function(socket){
       case "wake":
         touchThreshold++
         io.emit('wake', touchThreshold)
-        setTimeout(function(){
-          touchThreshold = 0
-        }, 3000)
         break;
       default:
 
