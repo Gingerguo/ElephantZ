@@ -18,8 +18,11 @@ http.listen(3000, function(){
 });
 
 var touchThreshold = 0
+var shakeThreshold = 0
+var swirlThreshold = 0
 setInterval(function(){
   touchThreshold = 0
+  shakeThreshold = 0
 }, 3000)
 
 io.on('connection', function(socket){
@@ -34,6 +37,14 @@ io.on('connection', function(socket){
       case "wake":
         touchThreshold++
         io.emit('wake', touchThreshold)
+        break;
+      case "shake":
+        shakeThreshold++
+        io.emit('shake', shakeThreshold)
+        break;
+      case "swirl":
+        swirlThreshold++
+        io.emit('swirl', swirlThreshold)
         break;
       default:
 

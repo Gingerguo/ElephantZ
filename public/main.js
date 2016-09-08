@@ -49,7 +49,7 @@ path.onFrame = function(event){
   }else if(swirl){
     swirlElephant(event)
     shake = false
-  } else if(wake){
+  } else if(awake){
     formElephant()
   }
   path.smooth({type: 'catmull-rom'})

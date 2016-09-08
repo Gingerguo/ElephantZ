@@ -9,5 +9,5 @@ function touchStarted(){
 }
 
 function deviceMoved(){
-
+  socket.emit('interaction', {cmd: "shake"})
 }
