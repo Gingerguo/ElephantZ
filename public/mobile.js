@@ -6,12 +6,10 @@ function setup(){
 	stroke(0);
 }
 
-function touchMoved(){
-  line(touchX, touchY, ptouchX, ptouchY);
-	return false;
+function touchStarted(){
+  socket.emit('interaction', {cmd: "wake"})
 }
 
-$(".post").on('submit', function(ev){
-  ev.preventDefault()
-  var image = $(".canvas").getDataUrl()
-})
+function deviceMoved(){
+
+}
