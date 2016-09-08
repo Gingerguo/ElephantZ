@@ -27,11 +27,14 @@ function initElephant(){
 function initCircle(){
   circle = new Path.Circle({
     center: [view.center.x, view.center.y],
-    radius: view.size.width / 2.4
+    radius: view.size.width / 2.7
+    // strokeWidth: 20,
+    // strokeColor: 'black'
   })
 }
 initCircle()
 initElephant()
+var circleRadius = circle.radius
 
 
 // var pathx = (view.size.width / 10) + (i * length)
@@ -41,7 +44,11 @@ for (var i = 0; i < points; i++) {
 
 path.onFrame = function(event){
   // path.strokeColor.hue += 1
-  formElephant()
+  if( event.time > 7 && event.time < 20){
+    swirlElephant(event)
+  } else{
+    formElephant()
+  }
   path.smooth({type: 'catmull-rom'})
 }
 
@@ -55,12 +62,13 @@ function formElephant(){
   }
 }
 
-function onMouseMove(event){
-  swirlElephant(event)
-}
-
 function swirlElephant(event){
-  path.firstSegment.point = event.point;
+  // var radius = Math.abs(circle.position.x - circle.firstSegment.point.x)
+  // path.firstSegment.point = [
+  //   circle.position.x +  Math.floor(Math.cos(event.count / 30)*radius),
+  //   circle.position.y +  Math.floor(Math.sin(event.count / 30)*radius)];
+  circle.rotate(5)
+  path.firstSegment.point = circle.firstSegment.point
   for (var i = 0; i < points - 1; i++) {
     var segment = path.segments[i];
     var nextSegment = segment.next;
@@ -68,4 +76,5 @@ function swirlElephant(event){
     vector.length = length;
     nextSegment.point = segment.point - vector;
   }
+  circle.scale(0.999)
 }
