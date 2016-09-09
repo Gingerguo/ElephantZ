@@ -20,14 +20,6 @@ http.listen(3000, function(){
 var rate = 0
 var shakeThreshold = 0
 var swirlThreshold = 0
-setInterval(function(){
-  touchThreshold = 0
-  shakeThreshold = 0
-}, 3000)
-
-function transform(taps, rate){
-
-}
 
 io.on('connection', function(socket){
   console.log('a user connected');
@@ -39,8 +31,7 @@ io.on('connection', function(socket){
   socket.on('interaction', function(data){
     switch (data.cmd) {
       case "formElephant":
-        touchThreshold++
-        io.emit('wake', touchThreshold)
+        io.emit('wake')
         break;
       case "shake":
         // console.log(data.accX + ", " + data.accY)

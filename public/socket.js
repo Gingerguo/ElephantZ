@@ -1,12 +1,10 @@
-var socket = io.connect('http://172.46.3.26:3000');
+var socket = io.connect('http://10.0.1.25:3000');
 var awake, shake, swirl = false;
 var steps = 0;
 
-socket.on('wake', function(data){
-  if (data > 10){
-    steps = Math.max(steps, data)
-    // awake = true
-  }
+socket.on('wake', function(){
+  console.log('works')
+  steps += 500
 })
 
 function animationRate() {
@@ -17,7 +15,6 @@ function animationRate() {
 }
 
 setInterval(function(){
-  //Math.max(10, 0)
   if(steps > 0){
     steps = steps - 50
   }
@@ -31,7 +28,6 @@ socket.on('swirl', function(data){
 })
 
 socket.on('shake', function(data){
-  console.log(data)
   if (data > 250 && awake) {
     shake = true
   }
