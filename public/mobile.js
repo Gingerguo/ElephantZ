@@ -5,9 +5,14 @@ function setup(){
 }
 
 function touchStarted(){
-  socket.emit('interaction', {cmd: "wake"})
+  socket.emit('interaction', {cmd: "formElephant"})
 }
 
 function deviceMoved(){
-  socket.emit('interaction', {cmd: "shake"})
+  var data = {
+    cmd: 'shake',
+    accX: accelerationX,
+    accY: accelerationY
+  }
+  socket.emit('interaction', data)
 }

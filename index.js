@@ -17,13 +17,17 @@ http.listen(3000, function(){
   console.log('listening on *:3000');
 });
 
-var touchThreshold = 0
+var rate = 0
 var shakeThreshold = 0
 var swirlThreshold = 0
 setInterval(function(){
   touchThreshold = 0
   shakeThreshold = 0
 }, 3000)
+
+function transform(taps, rate){
+
+}
 
 io.on('connection', function(socket){
   console.log('a user connected');
@@ -34,11 +38,12 @@ io.on('connection', function(socket){
 
   socket.on('interaction', function(data){
     switch (data.cmd) {
-      case "wake":
+      case "formElephant":
         touchThreshold++
         io.emit('wake', touchThreshold)
         break;
       case "shake":
+        // console.log(data.accX + ", " + data.accY)
         shakeThreshold++
         io.emit('shake', shakeThreshold)
         break;
@@ -50,5 +55,4 @@ io.on('connection', function(socket){
 
     }
   })
-
 });

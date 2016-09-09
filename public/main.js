@@ -5,16 +5,16 @@ var elephant, circle;
 var length = 30;
 
 var path = new Path({
-  strokeColor: 'red',
-  strokeWidth: 20,
   strokeCap: 'round',
-  strokeJoin: 'round',
-  fullySelected: true
+  strokeJoin: 'round'
 })
 for (var i = 0; i < points; i++) {
   path.add(new Point.random() * view.size)
 }
 path.smooth({type: 'continuous'})
+var pathClone = path.clone()
+path.strokeColor = 'red'
+path.strokeWidth = 20
 
 function initElephant(){
   elephant = new Path(elephantData)
@@ -39,17 +39,17 @@ initElephant()
 
 
 // var pathx = (view.size.width / 10) + (i * length)
-
+var rate;
 path.onFrame = function(event){
   // path.strokeColor.hue += 1
-  if(Math.abs(path.segments[0].point.y - elephant.segments[0].point.y) < .75 && shake){
+  if(shake){
     horizontalShake(event)
     verticalShake(event)
     swirl = false
   }else if(swirl){
     swirlElephant(event)
     shake = false
-  } else if(awake){
+  } else{
     formElephant()
   }
   path.smooth({type: 'catmull-rom'})
@@ -57,11 +57,23 @@ path.onFrame = function(event){
 
 function formElephant(){
   for (var i = 0; i < points; i++) {
-    var segment = path.segments[i].point
-    var target = elephant.segments[i].point
-    var vector = target - segment
-    path.segments[i].point += vector /15
-    path.smooth()
+    if (Math.abs(path.segments[0].point.y - elephant.segments[0].point.y) > .75) {
+      var segment = pathClone.segments[i].point
+      var target = elephant.segments[i].point
+      var vector = target - segment
+      path.segments[i].point += vector /animationRate()
+      path.smooth()
+    }
+  }
+}
+
+function onKeyUp(event){
+  if (event.key == 'w') {
+    console.log(steps + ", " + event.key)
+    steps += 500
+  } else if (event.key == 's') {
+    console.log(steps + ", " + event.key)
+    steps -= 500
   }
 }
 
