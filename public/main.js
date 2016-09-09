@@ -49,7 +49,7 @@ initElephant()
 var rate;
 path.onFrame = function(event){
   // path.strokeColor.hue += 1
-  if(shake){
+  if(true){
     horizontalShake(event)
     verticalShake(event)
     swirl = false
@@ -80,7 +80,7 @@ function onKeyUp(event){
 
 function horizontalShake(ev){
  for (var i = 0; i < points /2; i++) {
-   path.segments[2*i].point.x = elephant.segments[2*i].point.x + Math.floor(Math.sin(ev.count/20)*20);
+   path.segments[2*i].point.x = elephant.segments[2*i].point.x + Math.floor(Math.sin(ev.count/20)*distanceX);
   //  path.segments[2*i+1].point.x = elephant.segments[2*i+1].point.x + Math.floor(Math.cos(ev.count/20)*20);
  }
 }
@@ -88,7 +88,7 @@ function horizontalShake(ev){
 function verticalShake(ev){
   for (var i = 0; i < points /2; i++) {
     // path.segments[2*i].point.y = elephant.segments[2*i].point.y + Math.floor(Math.sin(ev.count/20)*20);
-    path.segments[2*i+1].point.y = elephant.segments[2*i+1].point.y + Math.floor(Math.cos(ev.count/20)*20);
+    path.segments[2*i+1].point.y = elephant.segments[2*i+1].point.y + Math.floor(Math.cos(ev.count/20)*distanceY);
   }
 }
 
