@@ -5,7 +5,7 @@ var distanceX = 0;
 var distanceY = 0
 
 socket.on('wake', function(){
-  steps += 500 * k
+  steps += 500
 })
 
 function animationRate() {
@@ -17,10 +17,7 @@ function animationRate() {
 
 
 socket.on('swirl', function(data){
-  console.log(data)
-  if (data > 10 && awake){
-    swirl = true
-  }
+  touchLocation = data
 })
 
 socket.on('shake', function(data){

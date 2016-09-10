@@ -16,3 +16,8 @@ function deviceMoved(){
   }
   socket.emit('interaction', data)
 }
+
+function touchMoved(){
+  socket.emit('interaction', {cmd:'swirl', x: touchX, y: touchY})
+  return false
+}
