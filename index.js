@@ -9,9 +9,15 @@ app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
+app.get('/mobile', function(req, res){
+  res.sendFile(__dirname + '/mobile.html');
+})
+
 http.listen(3000, function(){
   console.log('listening on *:3000');
 });
+
+var touchThreshold = 0
 
 io.on('connection', function(socket){
   console.log('a user connected');
@@ -20,9 +26,18 @@ io.on('connection', function(socket){
     console.log('a user disconnected');
   });
 
-  socket.on('chat message', function(msg){
-    io.emit('chat message', msg);
-    // console.log('message: ' + msg);
-  });
+  socket.on('interaction', function(data){
+    switch (data.cmd) {
+      case "wake":
+        touchThreshold++
+        io.emit('wake', touchThreshold)
+        setTimeout(function(){
+          touchThreshold = 0
+        }, 3000)
+        break;
+      default:
+
+    }
+  })
 
 });
