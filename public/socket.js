@@ -5,12 +5,12 @@ var distanceX = 0;
 var distanceY = 0
 
 socket.on('wake', function(){
-  steps += 500
+  steps += 500 * k
 })
 
 function animationRate() {
   if (steps > 9000) {
-    steps = 9000
+    steps = 9900
   }
   return 10000 - steps
 }

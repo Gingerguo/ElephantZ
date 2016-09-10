@@ -46,16 +46,15 @@ initElephant()
 
 
 // var pathx = (view.size.width / 10) + (i * length)
-var rate;
 path.onFrame = function(event){
   // path.strokeColor.hue += 1
-  if(true){
+  if(event.time < 10){
     horizontalShake(event)
     verticalShake(event)
-    swirl = false
-  }else if(swirl){
+    pathClone = path
+  }else if(false){
     swirlElephant(event)
-    shake = false
+    pathClone = path
   } else{
     formElephant()
   }
@@ -65,11 +64,12 @@ path.onFrame = function(event){
 function formElephant(){
   for (var i = 0; i < points; i++) {
     var check = path.segments[i].point - elephant.segments[i].point
-    if (Math.abs(check.x) > .75 || Math.abs(check.y) > .75) {
+    if (check.length > 1) {
       var segment = pathClone.segments[i].point
       var target = elephant.segments[i].point
       var vector = target - segment
-      path.segments[i].point += vector /animationRate()
+      //path.segments[i].point += vector /animationRate()
+      path.segments[i].point += vector /50
       path.smooth()
     }
   }
