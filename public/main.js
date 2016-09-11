@@ -8,15 +8,14 @@ var path = new Path({
   strokeJoin: 'round'
 })
 for (var i = 0; i < points; i++) {
-  //debugging
   var point = new Point.random()
   path.add( point * view.size)
 }
 path.smooth({type: 'continuous'})
-var pathClone = path.clone()
+// var pathClone = path.clone()
 path.strokeColor = 'red'
 path.strokeWidth = 20
-path.fullySelected = true
+// path.fullySelected = true
 touchLocation = path.firstSegment.point
 
 function initElephant(){
