@@ -23,8 +23,8 @@ socket.on('swirl', function(data){
 
 socket.on('shake', function(data){
   action = data.action
-  var newX = distanceX + Math.abs(data.accX) / 100
-  var newY = distanceY + Math.abs(data.accY) / 100
+  var newX = distanceX + Math.abs(data.accX) / 50
+  var newY = distanceY + Math.abs(data.accY) / 50
   distanceX = Math.min(newX, 100)
   distanceY = Math.min(newY, 100)
 })
