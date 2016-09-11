@@ -31,10 +31,20 @@ io.on('connection', function(socket){
         io.emit('wake')
         break;
       case "shake":
-        io.emit('shake', {accX: data.accX, accY:  data.accY})
+        if (data.accX > 10 || data.accY > 10){
+          io.emit('shake', {
+            action: 'shake',
+            accX: data.accX, accY:
+            data.accY
+          })
+        }
         break;
       case "swirl":
-        io.emit('swirl', {x: data.x, y: data.y})
+        io.emit('swirl', {
+          action: 'swirl',
+          x: data.x,
+          y: data.y
+        })
         break;
       default:
     }

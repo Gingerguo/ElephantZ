@@ -28,16 +28,6 @@ function initElephant(){
   elephant.position = [view.center.x - 50, view.center.y - 50]
   console.log(elephant.segments.length)
 }
-
-function initCircle(){
-  circle = new Path.Circle({
-    center: [view.center.x, view.center.y],
-    radius: view.size.width / 2.4
-    // strokeWidth: 20,
-    // strokeColor: 'black'
-  })
-}
-initCircle()
 initElephant()
 
 
@@ -45,16 +35,18 @@ initElephant()
 // var pathx = (view.size.width / 10) + (i * length)
 path.onFrame = function(event){
   // path.strokeColor.hue += 1
-  if(false){
-    horizontalShake(event)
-    verticalShake(event)
-    pathClone = path
-  }else if(true){
-    pathClone = path
+  switch (action) {
+    case "shake":
+      horizontalShake(event)
+      verticalShake(event)
+      pathClone = path
+      break;
+    case "swirl":
     swirlElephant()
     pathClone = path
-  } else{
-    formElephant()
+      break;
+    default:
+      formElephant()
   }
   path.smooth({type: 'catmull-rom'})
 }

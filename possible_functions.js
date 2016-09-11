@@ -49,3 +49,12 @@ function hitTester(event) {
     }
   }
 }
+function initCircle(){
+  circle = new Path.Circle({
+    center: [view.center.x, view.center.y],
+    radius: view.size.width / 2.4
+    // strokeWidth: 20,
+    // strokeColor: 'black'
+  })
+}
+initCircle()
