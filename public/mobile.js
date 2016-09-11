@@ -1,5 +1,3 @@
-var socket = io.connect('http://localhost:3000');
-
 function setup(){
   createCanvas(displayWidth, displayHeight);
 	strokeWeight(10)
@@ -7,9 +5,14 @@ function setup(){
 }
 
 function touchStarted(){
-  socket.emit('interaction', {cmd: "wake"})
+  socket.emit('interaction', {cmd: "formElephant"})
 }
 
 function deviceMoved(){
-
+  var data = {
+    cmd: 'shake',
+    accX: accelerationX,
+    accY: accelerationY
+  }
+  socket.emit('interaction', data)
 }
