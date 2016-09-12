@@ -4,10 +4,10 @@ var points = 86;
 var length = 30;
 
 var pond = new Group()
-var num = 200;
+var num = 120;
 
 var initBackground = function(){
-    for( var i = 0; i < num; i++ ){
+  for( var i = 0; i < num; i++ ){
     var hue = i*3;
     var alpha = i/num - 0.3;
     var r = Math.random()*(view.size.width/2.5);
@@ -38,7 +38,8 @@ var initBackground = function(){
       shadowBlur: 40,
       blendMode: 'overlay'
     }))
-}}
+  }
+}
 
 var path = new Path({
   strokeCap: 'round',
@@ -51,7 +52,7 @@ for (var i = 0; i < points; i++) {
 path.smooth({type: 'continuous'})
 path.strokeColor = 'grey'
 path.strokeWidth = 20
-path.visible = false
+// path.visible = false
 touchLocation = path.firstSegment.point
 
 function initElephant(){
