@@ -44,11 +44,6 @@ init();
 view.onFrame = function(event){
     pond.children.forEach(function(object){
         object.rotate(2)
-        // if(object.fillColor){
-        //     object.fillColor.hue += 1;
-        // }else{
-        //     object.strokeColor.hue += 1;
-        // }
         var currentx = object.position.x;
         var currenty = object.position.y;
         var vector = view.center - object.position;
