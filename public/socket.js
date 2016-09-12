@@ -4,8 +4,9 @@ var steps = 0;
 var distanceX = 0;
 var distanceY = 0
 
-socket.on('wake', function(){
+socket.on('form', function(){
   steps += 500
+  changeColour()
 })
 
 function animationRate() {

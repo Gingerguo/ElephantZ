@@ -28,7 +28,7 @@ io.on('connection', function(socket){
   socket.on('interaction', function(data){
     switch (data.cmd) {
       case "formElephant":
-        io.emit('wake')
+        io.emit('form')
         break;
       case "shake":
         if (data.accX > 10 || data.accY > 10){
