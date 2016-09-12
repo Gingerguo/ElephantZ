@@ -17,10 +17,6 @@ http.listen(3000, function(){
   console.log('listening on *:3000');
 });
 
-var acceleration = {
-  accX: 0,
-  accY: 0
-}
 
 io.on('connection', function(socket){
   console.log('a user connected');
@@ -35,11 +31,20 @@ io.on('connection', function(socket){
         io.emit('wake')
         break;
       case "shake":
-        io.emit('shake', {accX: data.accX, accY:  data.accY})
+        if (data.accX > 10 || data.accY > 10){
+          io.emit('shake', {
+            action: 'shake',
+            accX: data.accX, accY:
+            data.accY
+          })
+        }
         break;
       case "swirl":
-        swirlThreshold++
-        io.emit('swirl', swirlThreshold)
+        io.emit('swirl', {
+          action: 'swirl',
+          x: data.x,
+          y: data.y
+        })
         break;
       default:
     }
