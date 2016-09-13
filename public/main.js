@@ -5,6 +5,7 @@ var length = 30;
 
 var pond = new Group()
 var num = 120;
+var speed = 40;
 
 var initBackground = function(){
   for( var i = 0; i < num; i++ ){
@@ -24,7 +25,7 @@ var initBackground = function(){
       center: new Point(centerX,centerY),
       sides: Math.floor(Math.random()*4)+ 3,
       radius: Math.floor(Math.random()*4) * 10,
-      strokeColor: {hue: hue, saturation: 1, lightness: 0.9, alpha: alpha},
+      strokeColor: {hue: hue, saturation: 1, lightness: 0.6, alpha: alpha},
       shadowBlur: 20,
       blendMode: 'overlay'
     }))
@@ -34,7 +35,7 @@ var initBackground = function(){
       sides: Math.floor(Math.random()*4) + 3,
       radius: Math.floor(Math.random()*4)*15,
       fillColor: {hue: hue, saturation: 1, lightness: 0.9, alpha: alpha},
-      shadowColor: {hue: hue, saturation: 1, lightness: 0.9, alpha: alpha},
+      shadowColor: {hue: hue, saturation: 1, lightness: 0.6, alpha: alpha},
       shadowBlur: 40,
       blendMode: 'overlay'
     }))
@@ -45,14 +46,16 @@ var path = new Path({
   strokeCap: 'round',
   strokeJoin: 'round'
 })
+
 for (var i = 0; i < points; i++) {
   var point = new Point.random()
   path.add( point * view.size)
 }
+
 path.smooth({type: 'continuous'})
-path.strokeColor = 'grey'
+path.strokeColor = '#aaaaaa'
 path.strokeWidth = 20
-// path.visible = false
+path.visible = false
 touchLocation = path.firstSegment.point
 
 function initElephant(){
@@ -90,15 +93,9 @@ path.onFrame = function(event){
 pond.onFrame = function(event){
   pond.children.forEach(function(object){
     object.rotate(2)
-    var currentx = object.position.x;
-    var currenty = object.position.y;
-    var vector = view.center - object.position;
-    if (Math.cos(vector.angle) == 0 || Math.sin(vector.angle) == 0){
-      object.translate(1,1);
-    }else{
-      object.position.x += Math.cos(vector.angle)*4;
-      object.position.y -= Math.sin(vector.angle)*4;
-    }
+    object.position.x += ((object.position.x - view.center.x) /view.center.x)*10;
+    object.position.y += ((object.position.y - view.center.y) /view.center.y)*10;
+
     var hitOptions = {
       segments: true,
       stroke: true,
@@ -109,10 +106,10 @@ pond.onFrame = function(event){
     if (hitResult){
       var r = Math.random()*300;
       var i = Math.random()*360
-      var centerX = r*Math.cos(i) + view.center.x;
-      var centerY = r*Math.sin(i) + view.center.y;
-      object.position.x = centerX;
-      object.position.y = centerY;
+      var newX = r*Math.cos(i) + view.center.x;
+      var newY = r*Math.sin(i) + view.center.y;
+      object.position.x = newX;
+      object.position.y = newY;
     }
   })
 }
@@ -155,6 +152,7 @@ function swirlElephant() {
     }
 }
 
+
 function changeColour(){
   pond.children.forEach(function(object){
      if(object.fillColor){
@@ -164,4 +162,8 @@ function changeColour(){
        object.strokeColor.hue += 100;
      }
   })
+}
+
+function onMouseDown(event){
+  changeColour()
 }

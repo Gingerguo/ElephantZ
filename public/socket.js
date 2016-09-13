@@ -1,4 +1,4 @@
-var socket = io.connect('http://172.46.2.239:3000');
+var socket = io.connect('http://10.0.1.25:3000');
 var action;
 var steps = 0;
 var distanceX = 0;
@@ -6,7 +6,7 @@ var distanceY = 0
 
 socket.on('form', function(){
   steps += 500
-  changeColour()
+  // changeColour()
 })
 
 function animationRate() {
