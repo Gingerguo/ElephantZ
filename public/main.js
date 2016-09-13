@@ -55,7 +55,7 @@ for (var i = 0; i < points; i++) {
 path.smooth({type: 'continuous'})
 path.strokeColor = '#aaaaaa'
 path.strokeWidth = 20
-path.visible = false
+// path.visible = false
 touchLocation = path.firstSegment.point
 
 function initElephant(){
