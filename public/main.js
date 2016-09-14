@@ -4,13 +4,13 @@ var points = 86;
 var length = 30;
 
 var pond = new Group()
-var num = 120;
+var num = 200;
 var speed = 40;
 
 var initBackground = function(){
   for( var i = 0; i < num; i++ ){
     var hue = i*3;
-    var alpha = i/num - 0.3;
+    var alpha = i/num;
     var r = Math.random()*(view.size.width/2.5);
     var centerX;
     var centerY;
@@ -24,7 +24,7 @@ var initBackground = function(){
     pond.addChild(new Path.RegularPolygon({
       center: new Point(centerX,centerY),
       sides: Math.floor(Math.random()*4)+ 3,
-      radius: Math.floor(Math.random()*4) * 10,
+      radius: Math.floor(Math.random()*5) * 10,
       strokeColor: {hue: hue, saturation: 1, lightness: 0.6, alpha: alpha},
       shadowBlur: 20,
       blendMode: 'overlay'
@@ -33,7 +33,7 @@ var initBackground = function(){
     pond.addChild(new Path.RegularPolygon({
       center: new Point(centerX,centerY),
       sides: Math.floor(Math.random()*4) + 3,
-      radius: Math.floor(Math.random()*4)*15,
+      radius: Math.floor(Math.random()*5)*15,
       fillColor: {hue: hue, saturation: 1, lightness: 0.9, alpha: alpha},
       shadowColor: {hue: hue, saturation: 1, lightness: 0.6, alpha: alpha},
       shadowBlur: 40,
@@ -48,15 +48,18 @@ var path = new Path({
 })
 
 for (var i = 0; i < points; i++) {
-  var point = new Point.random()
-  path.add( point * view.size)
+  var point = new Point.random();
+  path.add( point * view.size);
 }
 
-path.smooth({type: 'continuous'})
-path.strokeColor = '#aaaaaa'
-path.strokeWidth = 20
+path.smooth({type: 'continuous'});
+path.strokeColor = 'white';
+path.strokeWidth = 10;
+path.shadowColor = '#e7f063';
+path.shadowBlur = 30;
+shadowOffset= new Point(5, 5);
 // path.visible = false
-touchLocation = path.firstSegment.point
+touchLocation = path.firstSegment.point;
 
 function initElephant(){
   elephant = new Path(elephantData)
@@ -70,7 +73,7 @@ initBackground()
 initElephant()
 
 var james = new Path.Rectangle(view.bounds);
-james.strokeColor = 'white';
+james.strokeColor = 'purple';
 james.strokeWidth = 10;
 
 path.onFrame = function(event){
