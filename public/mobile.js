@@ -7,22 +7,18 @@ var saveTime = 1;
 var rand = [];
 
 function setup(){
-  // createCanvas(displayWidth, displayHeight);
   createCanvas(windowWidth, windowHeight);
 	strokeWeight(10);
 	stroke(0);
-  c1 = color(206, 246, 245);
-  c2 = color(247, 109, 143);
+  c1 = color(196, 196, 88);
+  c2 = color(75, 37, 56);
   cirX = windowWidth / 2;
   cirY = windowHeight / 2;
   maxSteps = windowWidth / 4 / cirRad;
 }
 
 function draw(){
-  // setGradient(0, 0, displayWidth, displayHeight, c1, c2);
   setGradient(0, 0, windowWidth, windowHeight, c1, c2);
-
-
   if(millis() - saveTime > 200){
     step += 1;
     saveTime = millis();
