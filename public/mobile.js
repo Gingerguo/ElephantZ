@@ -10,8 +10,8 @@ function setup(){
   createCanvas(windowWidth, windowHeight);
 	strokeWeight(10);
 	stroke(0);
-  c1 = color(206, 246, 245);
-  c2 = color(247, 109, 143);
+  c1 = color(196, 196, 88);
+  c2 = color(75, 37, 56);
   cirX = windowWidth / 2;
   cirY = windowHeight / 2;
   maxSteps = windowWidth / 4 / cirRad;
