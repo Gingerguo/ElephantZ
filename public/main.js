@@ -3,7 +3,7 @@ var elephant, circle;
 var points = 86;
 var length = 30;
 
-var pond = new Group()
+var pond = new Group();
 var num = 200;
 var speed = 40;
 
@@ -28,7 +28,7 @@ var initBackground = function(){
       strokeColor: {hue: hue, saturation: 1, lightness: 0.6, alpha: alpha},
       shadowBlur: 20,
       blendMode: 'overlay'
-    }))
+    }));
 
     pond.addChild(new Path.RegularPolygon({
       center: new Point(centerX,centerY),
@@ -38,14 +38,14 @@ var initBackground = function(){
       shadowColor: {hue: hue, saturation: 1, lightness: 0.6, alpha: alpha},
       shadowBlur: 40,
       blendMode: 'overlay'
-    }))
+    }));
   }
-}
+};
 
 var path = new Path({
   strokeCap: 'round',
   strokeJoin: 'round'
-})
+});
 
 for (var i = 0; i < points; i++) {
   var point = new Point.random();
@@ -58,19 +58,17 @@ path.strokeWidth = 10;
 path.shadowColor = '#e7f063';
 path.shadowBlur = 30;
 shadowOffset= new Point(5, 5);
-// path.visible = false
 touchLocation = path.firstSegment.point;
 
 function initElephant(){
-  elephant = new Path(elephantData)
-  elephant.strokeColor = 'black'
-  elephant.strokeWidth = 10
-  elephant.visible = false
-  elephant.position = [view.center.x - 50, view.center.y - 50]
-  console.log(elephant.segments.length)
+  elephant = new Path(elephantData);
+  elephant.strokeColor = 'black';
+  elephant.strokeWidth = 10;
+  elephant.visible = false;
+  elephant.position = [view.center.x - 50, view.center.y - 50];
 }
-initBackground()
-initElephant()
+initBackground();
+initElephant();
 
 var james = new Path.Rectangle(view.bounds);
 james.strokeColor = 'purple';
@@ -79,23 +77,21 @@ james.strokeWidth = 10;
 path.onFrame = function(event){
   switch (action) {
     case "shake":
-      horizontalShake(event)
-      verticalShake(event)
-      pathClone = path
+      horizontalShake(event);
+      verticalShake(event);
       break;
     case "swirl":
-    swirlElephant()
-    pathClone = path
+      swirlElephant();
       break;
     default:
-      formElephant()
+      formElephant();
   }
-  path.smooth({type: 'catmull-rom'})
-}
+  path.smooth({type: 'catmull-rom'});
+};
 
 pond.onFrame = function(event){
   pond.children.forEach(function(object){
-    object.rotate(2)
+    object.rotate(2);
     object.position.x += ((object.position.x - view.center.x) /view.center.x)*10;
     object.position.y += ((object.position.y - view.center.y) /view.center.y)*10;
 
@@ -104,52 +100,54 @@ pond.onFrame = function(event){
       stroke: true,
       fill:true,
       tolerance: 5
-    }
+    };
     var hitResult = james.hitTest(object.position, hitOptions);
     if (hitResult){
       var r = Math.random()*300;
-      var i = Math.random()*360
+      var i = Math.random()*360;
       var newX = r*Math.cos(i) + view.center.x;
       var newY = r*Math.sin(i) + view.center.y;
       object.position.x = newX;
       object.position.y = newY;
     }
-  })
-}
+  });
+};
 
 function formElephant(){
   for (var i = 0; i < points; i++) {
-    var check = path.segments[i].point - elephant.segments[i].point
+    var check = path.segments[i].point - elephant.segments[i].point;
     if (check.length > 1) {
-      var segment = path.segments[i].point
-      var target = elephant.segments[i].point
-      var vector = target - segment
-      path.segments[i].point += vector /animationRate()
+      var segment = path.segments[i].point;
+      var target = elephant.segments[i].point;
+      var vector = target - segment;
+      path.segments[i].point += vector /animationRate();
     }
   }
 }
 
 function horizontalShake(ev){
  for (var i = 0; i < points /2; i++) {
-   path.segments[2*i].point.x = elephant.segments[2*i].point.x + Math.floor(Math.sin(ev.count/20)*distanceX);
+   path.segments[2*i].point.x = elephant.segments[2*i].point.x + Math.floor(Math.sin(ev.count/10)*distanceX);
  }
 }
 
 function verticalShake(ev){
   for (var i = 0; i < points /2; i++) {
-    path.segments[2*i+1].point.y = elephant.segments[2*i+1].point.y + Math.floor(Math.cos(ev.count/20)*distanceY);
+    path.segments[2*i+1].point.y = elephant.segments[2*i+1].point.y + Math.floor(Math.cos(ev.count/7)*distanceY);
   }
 }
 
 function swirlElephant() {
-    var segment = path.firstSegment.point
-    var target = new Point(touchLocation.x, touchLocation.y)
-    var vector = target - segment
-    path.firstSegment.point += vector /10
+    var segment = path.firstSegment.point;
+    var touchLocationX = ((touchLocation.x/100)*(view.size.width/2));
+    var touchLocationY = (touchLocation.y/100*(view.size.height/2));
+    var target = new Point(touchLocationX, touchLocationY);
+    var vector = target - segment;
+    path.firstSegment.point += vector /10;
     for (var i = 0; i < points - 1; i++) {
-      var segment = path.segments[i];
+      segment = path.segments[i];
       var nextSegment = segment.next;
-      var vector = segment.point - nextSegment.point;
+      vector = segment.point - nextSegment.point;
       vector.length = length;
       nextSegment.point = segment.point - vector;
     }

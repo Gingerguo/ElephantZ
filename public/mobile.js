@@ -49,7 +49,7 @@ function setGradient(x,y,w,h,c1,c2){
 }
 
 function touchStarted(){
-  socket.emit('interaction', {cmd: "formElephant"})
+  socket.emit('interaction', {cmd: "formElephant"});
 }
 
 function deviceMoved(){
@@ -57,11 +57,11 @@ function deviceMoved(){
     cmd: 'shake',
     accX: accelerationX,
     accY: accelerationY
-  }
-  socket.emit('interaction', data)
+  };
+  socket.emit('interaction', data);
 }
 
 function touchMoved(){
-  socket.emit('interaction', {cmd:'swirl', x: touchX, y: touchY})
-  return false
+  socket.emit('interaction', {cmd:'swirl', x: touchX, y: touchY});
+  return false;
 }

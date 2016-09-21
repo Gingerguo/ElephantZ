@@ -11,7 +11,7 @@ app.get('/', function(req, res){
 
 app.get('/mobile', function(req, res){
   res.sendFile(__dirname + '/mobile.html');
-})
+});
 
 http.listen(3000, function(){
   console.log('listening on *:3000');
@@ -28,15 +28,15 @@ io.on('connection', function(socket){
   socket.on('interaction', function(data){
     switch (data.cmd) {
       case "formElephant":
-        io.emit('form')
+        io.emit('form');
         break;
       case "shake":
         if (data.accX > 10 || data.accY > 10){
           io.emit('shake', {
             action: 'shake',
-            accX: data.accX, accY:
-            data.accY
-          })
+            accX: data.accX,
+            accY: data.accY
+          });
         }
         break;
       case "swirl":
@@ -44,9 +44,9 @@ io.on('connection', function(socket){
           action: 'swirl',
           x: data.x,
           y: data.y
-        })
+        });
         break;
       default:
     }
-  })
+  });
 });
