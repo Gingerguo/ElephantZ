@@ -1,4 +1,4 @@
-var socket = io.connect();
+var socket = io.connect("https://elephantz.herokuapp.com");
 var action;
 var steps = 0;
 var distanceX = 0;
