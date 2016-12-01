@@ -1,4 +1,4 @@
-var socket = io.connect('http://172.46.2.239:3000');
+var socket = io.connect();
 var action;
 var steps = 0;
 var distanceX = 0;
